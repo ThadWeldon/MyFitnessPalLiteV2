@@ -1,5 +1,6 @@
 using FitnessTracker.Dtos;
 using FitnessTracker.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -82,7 +83,9 @@ namespace FitnessTracker.Controllers
                 user.Email,
             });
         }
-
+        // GET return all users
+        //Requires Authorization (ex: Bearer jwt_token)
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GatherAllUser()
         {
