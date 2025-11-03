@@ -2,6 +2,7 @@ using FitnessTracker.Dtos;
 using FitnessTracker.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FitnessTracker.Controllers
 {
@@ -80,6 +81,18 @@ namespace FitnessTracker.Controllers
                 user.LastName,
                 user.Email,
             });
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GatherAllUser()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            if (User == null)
+            {
+                return BadRequest("No Users in Database");
+            }
+
+            return Ok(users);
         }
     }
 }
