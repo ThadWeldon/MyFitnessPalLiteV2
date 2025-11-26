@@ -20,8 +20,9 @@ namespace FitnessTracker.Controllers
         }
 
         // POST: api/users
+        [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> CreateUser(UserDto dto)
+        public async Task<IActionResult> CreateUser([FromBody] UserDto dto)
         {
             //check if email is already in db
             var isUserInputted = await _userManager.FindByEmailAsync(dto.email);
